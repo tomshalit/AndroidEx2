@@ -1,22 +1,19 @@
+package com.example.androidex2;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment1.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment1#newInstance} factory method to
- * create an instance of this fragment.
  */
 
 
@@ -85,7 +82,7 @@ public class Fragment1 extends Fragment {
 
             public void onClick(View v) {
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( true );
+                //((MainActivity) getActivity()).result( true );
                 isCliked = true;
                 enabeldButtons();
             }
@@ -97,7 +94,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag1.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( false );
+                //((MainActivity) getActivity()).result( false );
                 isCliked = true;
                 enabeldButtons();
             }
@@ -108,7 +105,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag3.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( false );
+                //((MainActivity) getActivity()).result( false );
                 isCliked = true;
                 enabeldButtons();
             }
@@ -119,7 +116,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag4.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( false );
+                //((MainActivity) getActivity()).result( false );
                 isCliked = true;
                 enabeldButtons();
             }

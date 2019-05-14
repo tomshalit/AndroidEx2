@@ -1,10 +1,11 @@
+package com.example.androidex2;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 
-public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,29 +13,19 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         setContentView(R.layout.activity_main);
 
         //Passing the data from activity to fragment
-        Bundle bundleQuestion1 = new Bundle();
-        Bundle bundleQuestion2 = new Bundle();
-        Bundle bundleQuestion3 = new Bundle();
-        Bundle bundleQuestion4 = new Bundle();
+        //Bundle bundleQuestion = new Bundle();
 
-        bundleQuestion1.putString( "q1(key)", "1(value)" );
-        bundleQuestion1.putString( "q2(key correct answer)", "2(value)" );
-        bundleQuestion1.putString( "q3(key)", "3(value)" );
-        bundleQuestion1.putString( "q4(key)", "4(value)" );
+        //bundleQuestion.putString( "q1(key)", "1(value)" );
+        //bundleQuestion.putString( "q2(key correct answer)", "2(value)" );
+        //bundleQuestion.putString( "q3(key)", "3(value)" );
+        //bundleQuestion.putString( "q4(key)", "4(value)" );
 
         // set Fragment1 Arguments
-        Fragment1 myObj = new Fragment1();
-        myObj.setArguments( bundleQuestion1 );
+        //Fragment1 myObj = new Fragment1();
+        //myObj.setArguments( bundleQuestion );
 
 
-        getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance( bundleQuestion1 ) ).commit();
+        //getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance( bundleQuestion ) ).commit();
     }
 
-
-    @Override
-    public void result(boolean bool) {
-        if (bool == true) {
-            Log.d( "tom a-Hamor", "result: sad" );
-        }
-    }
 }
