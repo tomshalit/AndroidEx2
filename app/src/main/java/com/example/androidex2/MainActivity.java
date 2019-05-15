@@ -55,6 +55,46 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         questions[2][1] = "3";
         questions[3][1] = "9";
         questions[4][1] = "0";
+        questions[0][2] = "Who killed Joffrey Baratheon?";
+        questions[1][2] = "Sansa Stark";
+        questions[2][2] = "Olenna Tyrell";
+        questions[3][2] = "Tyrion Lannister";
+        questions[4][2] = "Samuel Tarley";
+        questions[0][3] = "Who is Jon Snow's mother?";
+        questions[1][3] = "Lyanna Mormont";
+        questions[2][3] = "Lyanna Stark";
+        questions[3][3] = "Catelyn Stark";
+        questions[4][3] = "A nameless hooker";
+        questions[0][4] = "Which organ is Jaime Lannister missing?";
+        questions[1][4] = "Left hand";
+        questions[2][4] = "Right hand";
+        questions[3][4] = "Penis";
+        questions[4][4] = "Left leg";
+        questions[0][5] = "Who did Sansa stark marry first?";
+        questions[1][5] = "Ramsey Bolton";
+        questions[2][5] = "Tyrion Lannister";
+        questions[3][5] = "Joffrey Baratheon";
+        questions[4][5] = "Theon Greyjoy";
+        questions[0][6] = "Who killed Robert Baratheon?";
+        questions[1][6] = "Ned Stark";
+        questions[2][6] = "A boar";
+        questions[3][6] = "A dragon";
+        questions[4][6] = "Arya Stark";
+        questions[0][7] = "Who married Robb Stark?";
+        questions[1][7] = "Roslin Frey";
+        questions[2][7] = "Talisa Stark";
+        questions[3][7] = "Osha";
+        questions[4][7] = "Arya Stark";
+        questions[0][8] = "What is the name of Sansa Stark's direwolf?";
+        questions[1][8] = "Nymeria";
+        questions[2][8] = "Lady";
+        questions[3][8] = "Ghost";
+        questions[4][8] = "Shaggydog";
+        questions[0][9] = "What is Jon Snow's real name?";
+        questions[1][9] = "Rhaegar Targaryen";
+        questions[2][9] = "Aegon Targaryen";
+        questions[3][9] = "Viserys Targaryen";
+        questions[4][9] = "Aegon Snow";
     }
 
     @Override
