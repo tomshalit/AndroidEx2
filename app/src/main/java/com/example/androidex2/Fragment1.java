@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 
 /**
@@ -29,7 +29,6 @@ public class Fragment1 extends Fragment {
     private Button btnFrag2;
     private Button btnFrag3;
     private Button btnFrag4;
-
 
     public Fragment1() {
         // Required empty public constructor
@@ -63,12 +62,11 @@ public class Fragment1 extends Fragment {
         btnFrag4 = (Button) view.findViewById( R.id.butt4 );
 
         if (getArguments() != null) {
-            strFromActivity[0] = getArguments().getString( "q1(key)" );
-            strFromActivity[1] = getArguments().getString( "q2(key correct answer)" );
-            strFromActivity[2] = getArguments().getString( "q3(key)" );
-            strFromActivity[3] = getArguments().getString( "q4(key)" );
+            strFromActivity[0] = getArguments().getString( "a1" );
+            strFromActivity[1] = getArguments().getString( "a2" );
+            strFromActivity[2] = getArguments().getString( "a3" );
+            strFromActivity[3] = getArguments().getString( "a4" );
         }
-
 
         // show string into button
         btnFrag1.setText( strFromActivity[0] );
@@ -82,9 +80,14 @@ public class Fragment1 extends Fragment {
 
             public void onClick(View v) {
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                //((MainActivity) getActivity()).result( true );
                 isCliked = true;
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 enabeldButtons();
+                ((MainActivity) getActivity()).result( true );
             }
 
         } );
@@ -94,7 +97,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag1.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                //((MainActivity) getActivity()).result( false );
+                ((MainActivity) getActivity()).result( false );
                 isCliked = true;
                 enabeldButtons();
             }
@@ -105,7 +108,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag3.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                //((MainActivity) getActivity()).result( false );
+                ((MainActivity) getActivity()).result( false );
                 isCliked = true;
                 enabeldButtons();
             }
@@ -116,7 +119,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag4.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                //((MainActivity) getActivity()).result( false );
+                ((MainActivity) getActivity()).result( false );
                 isCliked = true;
                 enabeldButtons();
             }

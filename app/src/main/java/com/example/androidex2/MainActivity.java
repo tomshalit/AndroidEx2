@@ -5,7 +5,7 @@ import android.util.Log;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface{
     private String[][]  questions = new String[5][10];
 
     @Override
@@ -15,16 +15,13 @@ public class MainActivity extends AppCompatActivity {
         buildQuestions(questions);
         //Passing the data from activity to fragment
         Bundle bundleAnswers = new Bundle();
-
-        bundleAnswers.putString( "q1(key)", questions[1][0] );
-        bundleAnswers.putString( "q2(key correct answer)", questions[2][0] );
-        bundleAnswers.putString( "q3(key)", questions[3][0] );
-        bundleAnswers.putString( "q4(key)", questions[4][0] );
-
+        bundleAnswers.putString( "a1", questions[1][0] );
+        bundleAnswers.putString( "a2", questions[2][0] );
+        bundleAnswers.putString( "a3", questions[3][0] );
+        bundleAnswers.putString( "a4", questions[4][0] );
         // set Fragment1 Arguments
         Fragment1 myObj = new Fragment1();
         myObj.setArguments(bundleAnswers);
-
 
         getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
     }
@@ -35,6 +32,24 @@ public class MainActivity extends AppCompatActivity {
         questions[2][0] = "9";
         questions[3][0] = "13";
         questions[4][0] = "2";
+        questions[0][1] = "How many dragons does Khalisi have?";
+        questions[1][1] = "2";
+        questions[2][1] = "3";
+        questions[3][1] = "9";
+        questions[4][1] = "0";
     }
 
+    @Override
+    public void result(boolean bool) {
+
+        Bundle bundleAnswers = new Bundle();
+        bundleAnswers.putString( "a1", questions[1][1] );
+        bundleAnswers.putString( "a2", questions[2][1] );
+        bundleAnswers.putString( "a3", questions[3][1] );
+        bundleAnswers.putString( "a4", questions[4][1] );
+        Fragment1 myObj = new Fragment1();
+        myObj.setArguments(bundleAnswers);
+
+        getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
+    }
 }
