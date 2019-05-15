@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     private  int i = 0;
     private Button btnDone;
     private TextView questionText;
+    private  int rightAns ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         btnDone = (Button) findViewById( R.id.done );
         btnDone.setVisibility(View.GONE);
         buildQuestions(questions);
-
+        rightAns = 0;
 
         //Passing the data from activity to fragment
         Bundle bundleAnswers = new Bundle();
@@ -58,9 +59,13 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
 
     @Override
     public void result(boolean bool) {
+        if (bool == true){
+            rightAns++;
+        }
         i++;
         if ( i == 10){
             i = 0;
+            rightAns = 0;
 
         }
         final Bundle bundleAnswers = new Bundle();
