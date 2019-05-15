@@ -81,11 +81,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
                 isCliked = true;
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 enabeldButtons();
                 ((MainActivity) getActivity()).result( true );
             }

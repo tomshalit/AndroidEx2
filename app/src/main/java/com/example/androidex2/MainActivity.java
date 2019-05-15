@@ -1,27 +1,44 @@
 package com.example.androidex2;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface{
     private String[][]  questions = new String[5][10];
-
+    private  int i = 0;
+    private Button btnDone;
+    private TextView questionText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        questionText = (TextView) findViewById(R.id.question) ;
+        btnDone = (Button) findViewById( R.id.done );
+        btnDone.setVisibility(View.GONE);
         buildQuestions(questions);
+
+
         //Passing the data from activity to fragment
         Bundle bundleAnswers = new Bundle();
+        questionText.setText(questions[0][0]);
         bundleAnswers.putString( "a1", questions[1][0] );
         bundleAnswers.putString( "a2", questions[2][0] );
         bundleAnswers.putString( "a3", questions[3][0] );
         bundleAnswers.putString( "a4", questions[4][0] );
+
         // set Fragment1 Arguments
         Fragment1 myObj = new Fragment1();
         myObj.setArguments(bundleAnswers);
+
+
 
         getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
     }
@@ -41,15 +58,28 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
 
     @Override
     public void result(boolean bool) {
+        i++;
+        if ( i == 10){
+            i = 0;
 
-        Bundle bundleAnswers = new Bundle();
-        bundleAnswers.putString( "a1", questions[1][1] );
-        bundleAnswers.putString( "a2", questions[2][1] );
-        bundleAnswers.putString( "a3", questions[3][1] );
-        bundleAnswers.putString( "a4", questions[4][1] );
+        }
+        final Bundle bundleAnswers = new Bundle();
+
+        bundleAnswers.putString( "a1", questions[1][i] );
+        bundleAnswers.putString( "a2", questions[2][i] );
+        bundleAnswers.putString( "a3", questions[3][i] );
+        bundleAnswers.putString( "a4", questions[4][i] );
+
         Fragment1 myObj = new Fragment1();
         myObj.setArguments(bundleAnswers);
 
-        getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                questionText.setText(questions[0][i]);
+                getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
+            }
+        }, 2000);
+
     }
 }

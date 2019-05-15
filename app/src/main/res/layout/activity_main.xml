@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:id="@+id/question"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,6 +25,15 @@
         android:id="@+id/con"
         android:layout_alignParentBottom="true">
     </RelativeLayout>
+    <Button
+        android:id="@+id/done"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:text="Done"
+        android:textSize="50dp"
+        android:layout_above="@id/con"
+
+        />
 
 
 </RelativeLayout>
