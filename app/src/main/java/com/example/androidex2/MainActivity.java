@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         questionText = (TextView) findViewById(R.id.question) ;
-        btnDone = (Button) findViewById( R.id.done );
-        btnDone.setVisibility(View.GONE);
+        //btnDone = (Button) findViewById( R.id.done );
+        //btnDone.setVisibility(View.GONE);
         buildQuestions(questions);
         rightAns = 0;
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         questions[2][0] = "9";
         questions[3][0] = "13";
         questions[4][0] = "2";
-        questions[0][1] = "How many dragons does Khalisi have?";
+        questions[0][1] = "How many dragons does Khaleesi have?";
         questions[1][1] = "2";
         questions[2][1] = "3";
         questions[3][1] = "9";
@@ -104,9 +104,20 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         }
         i++;
         if ( i == 10){
+            final int rightAnsCopy = rightAns;
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FinishFragment myObj = new FinishFragment();
+                    getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAnsCopy) ).commit();
+                    i = 0;
+                    rightAns = 0;
+                }
+            }, 2000);
+            //FinishFragment myObj = new FinishFragment();
+            //getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAns) ).commit();
             i = 0;
             rightAns = 0;
-
         }
         final Bundle bundleAnswers = new Bundle();
 

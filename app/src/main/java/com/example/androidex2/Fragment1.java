@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,8 @@ public class Fragment1 extends Fragment {
     private Button btnFrag2;
     private Button btnFrag3;
     private Button btnFrag4;
+    private Button btnAnswer;
+    int answer;
 
     public Fragment1() {
         // Required empty public constructor
@@ -60,7 +64,8 @@ public class Fragment1 extends Fragment {
         btnFrag2 = (Button) view.findViewById( R.id.butt2 );
         btnFrag3 = (Button) view.findViewById( R.id.butt3 );
         btnFrag4 = (Button) view.findViewById( R.id.butt4 );
-
+        Random r = new Random();
+        int rand = r.nextInt(4);
         if (getArguments() != null) {
             strFromActivity[0] = getArguments().getString( "a1" );
             strFromActivity[1] = getArguments().getString( "a2" );
@@ -69,21 +74,62 @@ public class Fragment1 extends Fragment {
         }
 
         // show string into button
-        btnFrag1.setText( strFromActivity[0] );
-        btnFrag2.setText( strFromActivity[1] );
-        btnFrag3.setText( strFromActivity[2] );
-        btnFrag4.setText( strFromActivity[3] );
-
+        switch (rand){
+            case 0:
+                btnFrag1.setText( strFromActivity[1] );
+                btnFrag2.setText( strFromActivity[0] );
+                btnFrag3.setText( strFromActivity[2] );
+                btnFrag4.setText( strFromActivity[3] );
+                answer = rand;
+                btnAnswer = btnFrag1;
+                break;
+            case 1:
+                btnFrag1.setText( strFromActivity[0] );
+                btnFrag2.setText( strFromActivity[1] );
+                btnFrag3.setText( strFromActivity[2] );
+                btnFrag4.setText( strFromActivity[3] );
+                answer = rand;
+                btnAnswer = btnFrag2;
+                break;
+            case 2:
+                btnFrag1.setText( strFromActivity[2] );
+                btnFrag2.setText( strFromActivity[0] );
+                btnFrag3.setText( strFromActivity[1] );
+                btnFrag4.setText( strFromActivity[3] );
+                answer = rand;
+                btnAnswer = btnFrag3;
+                break;
+            case 3:
+                btnFrag1.setText( strFromActivity[0] );
+                btnFrag2.setText( strFromActivity[2] );
+                btnFrag3.setText( strFromActivity[3] );
+                btnFrag4.setText( strFromActivity[1] );
+                answer = rand;
+                btnAnswer = btnFrag4;
+                break;
+        }
+        //btnFrag1.setText( strFromActivity[0] );
+        //btnFrag2.setText( strFromActivity[1] );
+        //btnFrag3.setText( strFromActivity[2] );
+        //btnFrag4.setText( strFromActivity[3] );
 
         btnFrag2.setOnClickListener( new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
-                btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                isCliked = true;
-
-                enabeldButtons();
-                ((MainActivity) getActivity()).result( true );
+                if(answer == 1){
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( true );
+                }
+                else{
+                    btnFrag2.setBackgroundColor( Color.parseColor( "#ff0000" ) );
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( false );
+                }
             }
 
         } );
@@ -91,33 +137,57 @@ public class Fragment1 extends Fragment {
         btnFrag1.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnFrag1.setBackgroundColor( Color.parseColor( "#ff0000" ) );
-                btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( false );
-                isCliked = true;
-                enabeldButtons();
+                if(answer == 0){
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( true );
+                }
+                else{
+                    btnFrag1.setBackgroundColor( Color.parseColor( "#ff0000" ) );
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( false );
+                }
             }
         } );
 
         btnFrag3.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnFrag3.setBackgroundColor( Color.parseColor( "#ff0000" ) );
-                btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( false );
-                isCliked = true;
-                enabeldButtons();
+                if(answer == 2){
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( true );
+                }
+                else{
+                    btnFrag3.setBackgroundColor( Color.parseColor( "#ff0000" ) );
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( false );
+                }
             }
         } );
 
         btnFrag4.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnFrag4.setBackgroundColor( Color.parseColor( "#ff0000" ) );
-                btnFrag2.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                ((MainActivity) getActivity()).result( false );
-                isCliked = true;
-                enabeldButtons();
+                if(answer == 3){
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( true );
+                }
+                else{
+                    btnFrag3.setBackgroundColor( Color.parseColor( "#ff0000" ) );
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( false );
+                }
             }
         } );
 
