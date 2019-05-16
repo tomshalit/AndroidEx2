@@ -2,7 +2,9 @@
 
 
 Mor Tel tsur
+
 Aviv Weizman 
+
 Tom Shalit 
 
 Chen Levi
