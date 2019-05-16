@@ -108,10 +108,25 @@ public class Fragment1 extends Fragment {
                 btnAnswer = btnFrag4;
                 break;
         }
-        //btnFrag1.setText( strFromActivity[0] );
-        //btnFrag2.setText( strFromActivity[1] );
-        //btnFrag3.setText( strFromActivity[2] );
-        //btnFrag4.setText( strFromActivity[3] );
+
+        btnFrag1.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(answer == 0){
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( true );
+                }
+                else{
+                    btnFrag1.setBackgroundColor( Color.parseColor( "#ff0000" ) );
+                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
+                    isCliked = true;
+                    enabeldButtons();
+                    ((MainActivity) getActivity()).result( false );
+                }
+            }
+        } );
 
         btnFrag2.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -132,25 +147,6 @@ public class Fragment1 extends Fragment {
                 }
             }
 
-        } );
-
-        btnFrag1.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(answer == 0){
-                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                    isCliked = true;
-                    enabeldButtons();
-                    ((MainActivity) getActivity()).result( true );
-                }
-                else{
-                    btnFrag1.setBackgroundColor( Color.parseColor( "#ff0000" ) );
-                    btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
-                    isCliked = true;
-                    enabeldButtons();
-                    ((MainActivity) getActivity()).result( false );
-                }
-            }
         } );
 
         btnFrag3.setOnClickListener( new View.OnClickListener() {
@@ -182,7 +178,7 @@ public class Fragment1 extends Fragment {
                     ((MainActivity) getActivity()).result( true );
                 }
                 else{
-                    btnFrag3.setBackgroundColor( Color.parseColor( "#ff0000" ) );
+                    btnFrag4.setBackgroundColor( Color.parseColor( "#ff0000" ) );
                     btnAnswer.setBackgroundColor( Color.parseColor( "#00ff00" ) );
                     isCliked = true;
                     enabeldButtons();
