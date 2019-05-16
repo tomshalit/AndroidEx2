@@ -1,9 +1,9 @@
 # AndroidEx2
 
 
-Mor Tel tsur 
+Mor Tel tsur
 Aviv Weizman 
 Tom Shalit 
-Chen Levi 
+Chen Levi
 
 https://github.com/tomshalit/AndroidEx2
