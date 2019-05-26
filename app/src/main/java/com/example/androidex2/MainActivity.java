@@ -1,4 +1,5 @@
 package com.example.androidex2;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MediaPlayer sound= MediaPlayer.create(MainActivity.this,R.raw.trivia_sound);
+        sound.start();
         questionText = (TextView) findViewById(R.id.question) ;
         //btnDone = (Button) findViewById( R.id.done );
         //btnDone.setVisibility(View.GONE);
