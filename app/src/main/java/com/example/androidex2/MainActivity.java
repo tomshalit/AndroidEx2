@@ -1,13 +1,18 @@
 package com.example.androidex2;
-import android.os.Bundle;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface, Server.HandleQuestion {
+public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface{
     private String[][]  questions = new String[5][10];
     private  int i = 0;
     private Button btnDone;
@@ -21,13 +26,29 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MediaPlayer sound= MediaPlayer.create(MainActivity.this,R.raw.trivia_sound);
+        sound.start();
         questionText = (TextView) findViewById(R.id.question) ;
         //btnDone = (Button) findViewById( R.id.done );
         //btnDone.setVisibility(View.GONE);
+        buildQuestions(questions);
         rightAns = 0;
-        //buildQuestions(questions);
-        //questionText.setText(questions[0][0]);
-        Server.getTriviaQuestion(this, "9", "medium");
+
+        //Passing the data from activity to fragment
+        Bundle bundleAnswers = new Bundle();
+        questionText.setText(questions[0][0]);
+        bundleAnswers.putString( "a1", questions[1][0] );
+        bundleAnswers.putString( "a2", questions[2][0] );
+        bundleAnswers.putString( "a3", questions[3][0] );
+        bundleAnswers.putString( "a4", questions[4][0] );
+
+        // set Fragment1 Arguments
+        Fragment1 myObj = new Fragment1();
+        myObj.setArguments(bundleAnswers);
+
+
+
+        getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
     }
 
     private void buildQuestions(String[][] questions) {
@@ -101,35 +122,28 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
                     Server.getTriviaQuestion(MainActivity.this, "9", "medium");
                 }
             }, 2000);
+            //FinishFragment myObj = new FinishFragment();
+            //getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAns) ).commit();
             i = 0;
             rightAns = 0;
         }
+        final Bundle bundleAnswers = new Bundle();
 
+        bundleAnswers.putString( "a1", questions[1][i] );
+        bundleAnswers.putString( "a2", questions[2][i] );
+        bundleAnswers.putString( "a3", questions[3][i] );
+        bundleAnswers.putString( "a4", questions[4][i] );
+
+        Fragment1 myObj = new Fragment1();
+        myObj.setArguments(bundleAnswers);
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Server.getTriviaQuestion(MainActivity.this, "9", "medium");
+                questionText.setText(questions[0][i]);
+                getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
             }
         }, 2000);
 
-    }
-
-    @Override
-    public void handleQuestion(Server.Question q) {
-        currentQuestion = q;
-        questionText.setText( q.question);
-
-        //Passing the data from activity to fragment
-        Bundle bundleAnswers = new Bundle();
-        bundleAnswers.putString( "a1", q.answers.get( 0 ) );
-        bundleAnswers.putString( "a2", q.correctAnswer );
-        bundleAnswers.putString( "a3", q.answers.get( 1 )  );
-        bundleAnswers.putString( "a4", q.answers.get( 2 )  );
-
-        // set Fragment1 Arguments
-        Fragment1 myObj = new Fragment1();
-        myObj.setArguments(bundleAnswers);
-        getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
     }
 }
