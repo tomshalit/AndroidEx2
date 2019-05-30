@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
             rightAns = 0;
         }
 
-
+//
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
