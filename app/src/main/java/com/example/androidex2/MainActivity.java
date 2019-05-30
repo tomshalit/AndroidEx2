@@ -1,13 +1,8 @@
 package com.example.androidex2;
-import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,16 +13,10 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     private Button btnDone;
     private TextView questionText;
     private  int rightAns ;
-    Server.Question currentQuestion;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MediaPlayer sound= MediaPlayer.create(MainActivity.this,R.raw.trivia_sound);
-        sound.start();
         questionText = (TextView) findViewById(R.id.question) ;
         //btnDone = (Button) findViewById( R.id.done );
         //btnDone.setVisibility(View.GONE);
@@ -119,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
                     getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAnsCopy) ).commit();
                     i = 0;
                     rightAns = 0;
-                    Server.getTriviaQuestion(MainActivity.this, "9", "medium");
                 }
             }, 2000);
             //FinishFragment myObj = new FinishFragment();
