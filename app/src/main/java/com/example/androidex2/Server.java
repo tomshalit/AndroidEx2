@@ -23,15 +23,15 @@ public class Server {
         public Question(){}
         public Question(JSONObject first){
             try {
-                    question =  Html.fromHtml(first.getString("question")).toString();
-                    correctAnswer =  Html.fromHtml(first.getString("correct_answer")).toString();
-                  //  answers.add(correctAnswer);
-                    JSONArray wrong_ans = first
-                            .getJSONArray("incorrect_answers");
-                    for (int i = 0; i < wrong_ans.length(); i++) {
-                        Log.i( "i", "Question: " + i);
-                        answers.add( Html.fromHtml(wrong_ans.getString(i)).toString());
-                    }
+                question =  Html.fromHtml(first.getString("question")).toString();
+                correctAnswer =  Html.fromHtml(first.getString("correct_answer")).toString();
+                //  answers.add(correctAnswer);
+                JSONArray wrong_ans = first
+                        .getJSONArray("incorrect_answers");
+                for (int i = 0; i < wrong_ans.length(); i++) {
+                    Log.i( "i", "Question: " + i);
+                    answers.add( Html.fromHtml(wrong_ans.getString(i)).toString());
+                }
 
             } catch (Exception e){
                 Log.e("error", e.toString());
@@ -47,7 +47,7 @@ public class Server {
 
         String url = "https://opentdb.com/api.php?amount=1&category=" +category+ "&difficulty=" +difficulty+ "&type=multiple";
 
-       // String url = "https://opentdb.com/api.php?amount=1&category=9&difficulty=medium&type=multiple";
+        // String url = "https://opentdb.com/api.php?amount=1&category=9&difficulty=medium&type=multiple";
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, new JsonHttpResponseHandler() {
