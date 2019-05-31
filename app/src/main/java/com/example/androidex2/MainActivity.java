@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.media.MediaPlayer;
 
 
-public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface , Server.HandleQuestion {
+public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface , Server.HandleQuestion , StartFragment.FragmentSrartInterface {
     private  int i = 0;
     private Button btnDone;
     private TextView questionText;
@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         rightAns = 0;
         //buildQuestions(questions);
         //questionText.setText(questions[0][0]);
-        Server.getTriviaQuestion(this, "9", "medium");
+        StartFragment myObj = new StartFragment();
+        getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, StartFragment.newInstance() ).commit();
+        //Server.getTriviaQuestion(this, "9", "medium");
     }
 
 
@@ -91,5 +93,11 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     public void sound(boolean b) {
         if (b) sound.start();
         else   sound.pause();
+    }
+
+    @Override
+    public void setGame(Bundle bundle) {
+        Log.i("test 3",bundle.getString("category") + " " + bundle.getString("diffucalty"));
+        Server.getTriviaQuestion(this, bundle.getString("category"),  bundle.getString("diffucalty").toLowerCase());
     }
 }
