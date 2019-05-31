@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     private  int rightAns ;
     private MediaPlayer sound;
     Server.Question currentQuestion;
+    String category;
+    String diffucalty;
 
 
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
                     getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAnsCopy) ).commit();
                     i = 0;
                     rightAns = 0;
-                    Server.getTriviaQuestion(MainActivity.this, "9", "medium");
+                    Server.getTriviaQuestion(MainActivity.this, category, diffucalty);
                 }
             }, 2000);
             i = 0;
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Server.getTriviaQuestion(MainActivity.this, "9", "medium");
+                Server.getTriviaQuestion(MainActivity.this, category, diffucalty);
             }
         }, 2000);
 
@@ -98,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     @Override
     public void setGame(Bundle bundle) {
         Log.i("test 3",bundle.getString("category") + " " + bundle.getString("diffucalty"));
+        category = bundle.getString("category");
+        diffucalty = bundle.getString("diffucalty").toLowerCase();
         Server.getTriviaQuestion(this, bundle.getString("category"),  bundle.getString("diffucalty").toLowerCase());
     }
 }
