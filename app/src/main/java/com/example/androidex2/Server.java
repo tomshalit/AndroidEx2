@@ -46,7 +46,7 @@ public class Server {
     public static void getTriviaQuestion(final HandleQuestion h, String category, String difficulty){
 
         String url = "https://opentdb.com/api.php?amount=1&category=" +category+ "&difficulty=" +difficulty+ "&type=multiple";
-
+        Log.i("test 4", url);
         // String url = "https://opentdb.com/api.php?amount=1&category=9&difficulty=medium&type=multiple";
 
         AsyncHttpClient client = new AsyncHttpClient();
