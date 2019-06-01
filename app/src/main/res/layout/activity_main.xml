@@ -12,24 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/title">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7"
-            android:background="@drawable/trivia_title"></LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3">
-            <TextView
-                android:id="@+id/timer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="35dp"
-                android:gravity="center"/>
-        </RelativeLayout>
-    </LinearLayout>
+        android:id="@+id/title"
+        android:background="@drawable/got"></LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
