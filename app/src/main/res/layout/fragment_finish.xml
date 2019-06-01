@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FinishFragment"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/dragon">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -12,11 +12,6 @@
         android:gravity="center"
         android:id="@+id/endFrame"
         >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/gif"/>
 
         <TextView
             android:layout_width="300dp"

@@ -1,7 +1,6 @@
 package com.example.androidex2;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 
 /**
@@ -22,7 +18,6 @@ import com.bumptech.glide.Glide;
 public class FinishFragment extends Fragment {
     TextView textView;
     Button donebtn;
-    MediaPlayer applause;
 
     public FinishFragment() {
 
@@ -58,25 +53,7 @@ public class FinishFragment extends Fragment {
             }
 
         });
-
-        Glide.with(this)
-                .load("https://media.giphy.com/media/2lQCBjuFMLCOvXno4l/giphy.gif")
-                //.placeholder(placeholder)
-                .fitCenter()
-                .into((ImageView)view.findViewById(R.id.gif));
-        applause = MediaPlayer.create(getActivity(),R.raw.applause3);
-        ((MainActivity) getActivity()).sound(false);
-        applause.start();
-
-
-
         return view;
-    }
-
-    public void onPause() {
-        super.onPause();
-        applause.pause();
-        ((MainActivity) getActivity()).sound(true);
     }
 
     @Override
