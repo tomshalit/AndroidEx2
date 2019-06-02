@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.Random;
 
@@ -21,9 +20,6 @@ import java.util.Random;
 
 public class Fragment1 extends Fragment {
     static Bundle arg1;
-    static Bundle arg2;
-    static Bundle arg3;
-    static Bundle arg4;
     String strFromActivity[] = new String[4];
     Fragment1Interface context;
     private boolean isCliked = false;

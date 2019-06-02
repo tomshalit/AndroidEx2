@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
                 timeLeft += seconds;
                 timerText.setText( timeLeft );
             }
-//
+
             @Override
             public void onFinish() {
                 questionText.setText( "Time's Up" );
@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
 
     @Override
     public void setGame(Bundle bundle) {
-        Log.i("test 3",bundle.getString("category") + " " + bundle.getString("difficulty"));
         category = bundle.getString("category");
         difficulty = bundle.getString("difficulty").toLowerCase();
         Server.getTriviaQuestion(this, category,  difficulty);
