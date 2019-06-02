@@ -75,16 +75,16 @@ public class FinishFragment extends Fragment {
                 //.placeholder(placeholder)
                 .fitCenter()
                 .into((ImageView)view.findViewById(R.id.gif));
-        //applause = MediaPlayer.create(getActivity(),R.raw.applause3);
-        //((MainActivity) getActivity()).sound(false);
-        //applause.start();
+        applause = MediaPlayer.create(getActivity(),R.raw.applause3);
+        ((MainActivity) getActivity()).sound(false);
+        applause.start();
         return view;
     }
 
     public void onPause() {
         super.onPause();
-        //applause.pause();
-        //((MainActivity) getActivity()).sound(true);
+        applause.pause();
+        ((MainActivity) getActivity()).sound(true);
     }
 
     @Override
