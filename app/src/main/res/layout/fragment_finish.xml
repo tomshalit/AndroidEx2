@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FinishFragment"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/endFrame"
-        >
-
-        <ImageView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/endMassageLayout"
+        android:gravity="center">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/gif"/>
-
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
             android:textSize="40dp"
-            android:textColor="#08f"
+            android:textColor="#000"
             android:id="@+id/endMassage"
-            android:gravity="center"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:gravity="center"
+        android:id="@+id/endFrame">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gif"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_below="@+id/endFrame">
         <Button
             android:id="@+id/done"
-            android:layout_width="400dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="100dp"
-            android:text="RESTART"
-            android:textSize="50dp"
-            />
-    </RelativeLayout>
-
-</RelativeLayout>
+            android:text="RESTART QUESTION"
+            android:textSize="30dp" />
+        <Button
+            android:id="@+id/restart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="100dp"
+            android:text="RESTART CATEGORY"
+            android:textSize="30dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,10 +1,9 @@
 package com.example.androidex2;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -14,9 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import android.support.v7.app.AppCompatActivity;
 
 public class StartFragment extends Fragment {
 
@@ -65,28 +62,28 @@ public class StartFragment extends Fragment {
         btnSatrt = (Button) view.findViewById(R.id.btnSubmit);
 
 
-            btnSatrt.setOnClickListener(new OnClickListener() {
+        btnSatrt.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    categoryIndex = spinner_Category.getSelectedItemPosition()+9;
-                    diff = (String) spinner_diff.getSelectedItem();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("diffucalty",diff);
-                    bundle.putString("category",new StringBuilder().append(categoryIndex).toString());
-                    Log.i("test 1",new StringBuilder().append(categoryIndex).toString() + " " + diff);
-                    Log.i("test 2",bundle.getString("category") + " " + bundle.getString("diffucalty"));
-                    //  Toast.makeText(this.,
-                    //        "OnClickListener : " +
-                    //              "\nSpinner 1 : "+ String.valueOf(spinner_Category.getSelectedItemPosition()) +
-                    //            "\nSpinner 2 : "+ String.valueOf(spinner_diff.getSelectedItem()),
-                    //  Toast.LENGTH_SHORT).show();
-                    context.setGame(bundle);
-                    getFragmentManager().beginTransaction().remove(StartFragment.this).commit();
-                }
+            @Override
+            public void onClick(View v) {
+                categoryIndex = spinner_Category.getSelectedItemPosition()+9;
+                diff = (String) spinner_diff.getSelectedItem();
+                Bundle bundle = new Bundle();
+                bundle.putString("difficulty",diff);
+                bundle.putString("category",new StringBuilder().append(categoryIndex).toString());
+                Log.i("test 1",new StringBuilder().append(categoryIndex).toString() + " " + diff);
+                Log.i("test 2",bundle.getString("category") + " " + bundle.getString("diffucalty"));
+                context.setGame(bundle);
+                new Handler( Looper.getMainLooper() ).postDelayed( new Runnable() {
+                    @Override
+                    public void run() {
+                        getFragmentManager().beginTransaction().remove(StartFragment.this).commit();
+                    }
+                }, 750 );
+            }
 
-            });
-            return  view;
+        });
+        return  view;
 
     }
 
@@ -101,21 +98,3 @@ public class StartFragment extends Fragment {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

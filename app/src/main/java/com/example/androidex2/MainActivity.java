@@ -1,29 +1,26 @@
 package com.example.androidex2;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.media.MediaPlayer;
 
 
-public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface , Server.HandleQuestion , StartFragment.FragmentSrartInterface {
+public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface , Server.HandleQuestion , StartFragment.FragmentSrartInterface, FinishFragment.FinishFragmentInterface {
     private  int i = 0;
     private Button btnDone;
     private TextView questionText;
     private  int rightAns ;
     private MediaPlayer sound;
-    Server.Question currentQuestion;
-    String category;
-    String diffucalty;
-
-
+    private Server.Question currentQuestion;
+    private String category;
+    private String difficulty;
+    private CountDownTimer countDownTimer;
+    private TextView timerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +28,18 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         setContentView(R.layout.activity_main);
         sound= MediaPlayer.create(MainActivity.this,R.raw.trivia_sound);
         sound.start();
-        questionText = (TextView) findViewById(R.id.question) ;
-        //btnDone = (Button) findViewById( R.id.done );
-        //btnDone.setVisibility(View.GONE);
+        questionText = (TextView) findViewById(R.id.question);
+        timerText = findViewById( R.id.timer );
         rightAns = 0;
-        //buildQuestions(questions);
-        //questionText.setText(questions[0][0]);
+
         StartFragment myObj = new StartFragment();
         getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, StartFragment.newInstance() ).commit();
-        //Server.getTriviaQuestion(this, "9", "medium");
     }
 
 
     @Override
     public void result(boolean bool) {
+        countDownTimer.cancel();
         if (bool == true){
             rightAns++;
         }
@@ -54,25 +49,20 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    FinishFragment myObj = new FinishFragment();
                     getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAnsCopy) ).commit();
-                    i = 0;
-                    rightAns = 0;
-                    Server.getTriviaQuestion(MainActivity.this, category, diffucalty);
                 }
-            }, 2000);
+            }, 1000);
             i = 0;
             rightAns = 0;
         }
-
-
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Server.getTriviaQuestion(MainActivity.this, category, diffucalty);
-            }
-        }, 2000);
-
+        else {
+            new Handler( Looper.getMainLooper() ).postDelayed( new Runnable() {
+                @Override
+                public void run() {
+                    Server.getTriviaQuestion( MainActivity.this, category, difficulty );
+                }
+            }, 1000 );
+        }
     }
 
     @Override
@@ -87,11 +77,31 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         bundleAnswers.putString( "a3", q.answers.get( 1 )  );
         bundleAnswers.putString( "a4", q.answers.get( 2 )  );
 
-        // set Fragment1 Arguments
-        Fragment1 myObj = new Fragment1();
-        myObj.setArguments(bundleAnswers);
+        startTimer();
         getSupportFragmentManager().beginTransaction().replace( R.id.con, Fragment1.newInstance(bundleAnswers) ).commit();
     }
+
+    private void startTimer() {
+        countDownTimer  = new CountDownTimer(10000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int minutes = (int)millisUntilFinished/60000;
+                int seconds = (int)millisUntilFinished%60000/1000;
+                String timeLeft;
+                timeLeft = minutes + ":";
+                if (seconds < 10) timeLeft += "0";
+                timeLeft += seconds;
+                timerText.setText( timeLeft );
+            }
+
+            @Override
+            public void onFinish() {
+                questionText.setText( "Time's Up" );
+                result( false );
+            }
+        }.start();
+    }
+
     public void sound(boolean b) {
         if (b) sound.start();
         else   sound.pause();
@@ -99,9 +109,19 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
 
     @Override
     public void setGame(Bundle bundle) {
-        Log.i("test 3",bundle.getString("category") + " " + bundle.getString("diffucalty"));
         category = bundle.getString("category");
-        diffucalty = bundle.getString("diffucalty").toLowerCase();
-        Server.getTriviaQuestion(this, bundle.getString("category"),  bundle.getString("diffucalty").toLowerCase());
+        difficulty = bundle.getString("difficulty").toLowerCase();
+        Server.getTriviaQuestion(this, category,  difficulty);
+    }
+
+    @Override
+    public void restart(boolean bool) {
+        if(bool == true) {
+            getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, StartFragment.newInstance() ).commit();
+        }
+        else {
+            Server.getTriviaQuestion(MainActivity.this, category, difficulty);
+        }
+
     }
 }

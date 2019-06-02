@@ -2,8 +2,9 @@ package com.example.androidex2;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 
 
@@ -21,12 +21,11 @@ import com.bumptech.glide.Glide;
  */
 public class FinishFragment extends Fragment {
     TextView textView;
-    Button donebtn;
+    Button doneBtn;
+    Button restartBtn;
+    FinishFragmentInterface context;
     MediaPlayer applause;
-
-    public FinishFragment() {
-
-    }
+    public FinishFragment() {}
 
     public static FinishFragment newInstance(int correctAns) {
         FinishFragment fragment = new FinishFragment();
@@ -46,17 +45,29 @@ public class FinishFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_finish, container, false);
         textView = view.findViewById(R.id.endMassage);
-        donebtn = view.findViewById(R.id.done);
+        doneBtn = view.findViewById(R.id.done);
+        restartBtn = view.findViewById(R.id.restart);
         int correctAns = getArguments().getInt("correctAns");
 
         textView.setText("you have got " + Integer.toString(correctAns) + " answers correct");
-        donebtn.setOnClickListener(new View.OnClickListener() {
+        doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().remove(FinishFragment.this).commit();
+                context.restart( false );
+                new Handler( Looper.getMainLooper() ).postDelayed( new Runnable() {
+                    @Override
+                    public void run() {
+                        getFragmentManager().beginTransaction().remove(FinishFragment.this).commit();
+                    }
+                }, 750 );
             }
+        });
 
+        restartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.restart( true );
+            }
         });
 
         Glide.with(this)
@@ -67,9 +78,6 @@ public class FinishFragment extends Fragment {
         applause = MediaPlayer.create(getActivity(),R.raw.applause3);
         ((MainActivity) getActivity()).sound(false);
         applause.start();
-
-
-
         return view;
     }
 
@@ -82,6 +90,15 @@ public class FinishFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof FinishFragment.FinishFragmentInterface) {
+            this.context = (FinishFragmentInterface) context;
+        } else {
+            throw new RuntimeException( context.toString()
+                    + " must implement Fragment1Interface" );
+        }
+    }
 
+    public interface FinishFragmentInterface {
+        public void restart(boolean bool);
     }
 }
