@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/start_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-
-    android:background="@drawable/trivia_bg"
+    android:orientation="vertical"
     android:visibility="visible">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="top"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/trivia_title" />
+
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:gravity="center"
@@ -21,9 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text=" Select Level of difficulty:"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/black"
             android:textSize="20dp"
-            android:textStyle=" bold |italic" />
+            android:textStyle="bold|italic" />
 
         <Spinner
             android:id="@+id/diff_q"
@@ -37,27 +50,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/black"
             android:text=" Select Category:"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15dp" />
+            android:textSize="20dp" />
 
         <Spinner
             android:id="@+id/category_q"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="1dp"
             android:entries="@array/category_arrays"
             android:prompt="@string/Category_prompt"
             android:scrollbarSize="25dp" />
 
-
-        <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="START" />
-
     </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"></LinearLayout>
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="100dp"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:gravity="center"
+        android:background="@drawable/galaxy"
+        android:textColor="@color/white"
+        android:text="START" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"></LinearLayout>
+</LinearLayout>
+
+
+
+</LinearLayout>
