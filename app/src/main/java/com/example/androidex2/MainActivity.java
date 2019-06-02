@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
                 timeLeft += seconds;
                 timerText.setText( timeLeft );
             }
-
+//
             @Override
             public void onFinish() {
                 questionText.setText( "Time's Up" );
