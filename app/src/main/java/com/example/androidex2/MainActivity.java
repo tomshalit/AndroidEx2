@@ -5,16 +5,15 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements Fragment1.Fragment1Interface , Server.HandleQuestion , StartFragment.FragmentSrartInterface, FinishFragment.FinishFragmentInterface {
-    private  int i = 0;
+    private int questionNum;
     private Button btnDone;
     private TextView questionText;
-    private  int rightAns ;
+    private int rightAns ;
     private MediaPlayer sound;
     private Server.Question currentQuestion;
     private String category;
@@ -30,12 +29,19 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         sound.start();
         questionText = (TextView) findViewById(R.id.question);
         timerText = findViewById( R.id.timer );
+        questionNum = 0;
         rightAns = 0;
 
         StartFragment myObj = new StartFragment();
         getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, StartFragment.newInstance() ).commit();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sound.pause();
+        countDownTimer.cancel();
+    }
 
     @Override
     public void result(boolean bool) {
@@ -43,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
         if (bool == true){
             rightAns++;
         }
-        i++;
-        if ( i == 10){
+        questionNum++;
+        if ( questionNum == 10){
             final int rightAnsCopy = rightAns;
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
                     getSupportFragmentManager().beginTransaction().replace( R.id.mainActivity, FinishFragment.newInstance(rightAnsCopy) ).commit();
                 }
             }, 1000);
-            i = 0;
+            questionNum = 0;
             rightAns = 0;
         }
         else {

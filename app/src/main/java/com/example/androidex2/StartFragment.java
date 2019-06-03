@@ -72,7 +72,7 @@ public class StartFragment extends Fragment {
                 bundle.putString("difficulty",diff);
                 bundle.putString("category",new StringBuilder().append(categoryIndex).toString());
                 Log.i("test 1",new StringBuilder().append(categoryIndex).toString() + " " + diff);
-                Log.i("test 2",bundle.getString("category") + " " + bundle.getString("diffucalty"));
+                Log.i("test 2",bundle.getString("category") + " " + bundle.getString("difficulty"));
                 context.setGame(bundle);
                 new Handler( Looper.getMainLooper() ).postDelayed( new Runnable() {
                     @Override
