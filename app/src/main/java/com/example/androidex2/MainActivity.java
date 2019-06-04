@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     private String difficulty;
     private CountDownTimer countDownTimer;
     private TextView timerText;
+    private  int num_of_questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
             rightAns++;
         }
         questionNum++;
-        if ( questionNum == 10){
+        if ( questionNum == num_of_questions){
             final int rightAnsCopy = rightAns;
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements Fragment1.Fragmen
     public void setGame(Bundle bundle) {
         category = bundle.getString("category");
         difficulty = bundle.getString("difficulty").toLowerCase();
+        num_of_questions = Integer.parseInt(bundle.getString("qNum"));
         Server.getTriviaQuestion(this, category,  difficulty);
     }
 

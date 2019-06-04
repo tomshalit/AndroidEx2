@@ -63,6 +63,21 @@
             android:entries="@array/category_arrays"
             android:prompt="@string/Category_prompt"
             android:scrollbarSize="25dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/black"
+            android:text=" Select the number of questions:"
+            android:textSize="20dp" />
+        <Spinner
+            android:id="@+id/q_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:entries="@array/num_q_arrays"
+            android:scrollbarSize="25dp" />
 
     </LinearLayout>
 
